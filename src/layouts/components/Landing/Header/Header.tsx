@@ -15,23 +15,23 @@ const Container = styled.div`
     padding: 0px !important;
   }
 `
-const items: MenuProps['items'] = [
-  {
-    label: <Link to={path.landing}>Vickee</Link>,
-    className: 'min-w-[140px] text-center',
-    key: '1'
-  },
-  {
-    label: <Link to={path.landing}>S.Mentor</Link>,
-    className: 'min-w-[140px] text-center',
-    key: '2'
-  },
-  {
-    label: <Link to={path.landing}>Gói sản phẩm dịch vụ</Link>,
-    className: 'min-w-[140px] text-center',
-    key: '3'
-  }
-]
+// const items: MenuProps['items'] = [
+//   {
+//     label: <Link to={path.landing}>Vickee</Link>,
+//     className: 'min-w-[140px] text-center',
+//     key: '1'
+//   },
+//   {
+//     label: <Link to={path.landing}>S.Mentor</Link>,
+//     className: 'min-w-[140px] text-center',
+//     key: '2'
+//   },
+//   {
+//     label: <Link to={path.landing}>Gói sản phẩm dịch vụ</Link>,
+//     className: 'min-w-[140px] text-center',
+//     key: '3'
+//   }
+// ]
 
 export const Header = () => {
   const [activeLink, setActiveLink] = useState<string | null>(null)

@@ -38,8 +38,8 @@ function Dashboard() {
   return (
     <div className='layout-content'>
       <Helmet>
-        <title>Vickee | Dashboard</title>
-        <meta name='description' content={'Vickee | Bảng điều khiển'} />
+        <title>Construction | Dashboard</title>
+        <meta name='description' content={'Construction | Bảng điều khiển'} />
       </Helmet>
       <Row gutter={[24, 0]}>
         <Col xs={24} sm={24} md={12} lg={12} xl={10} className='mb-6'>
@@ -59,13 +59,13 @@ function Dashboard() {
           <Card bordered={false} className='h-full criclebox cardbody'>
             <div className='project-ant'>
               <div>
-                <Title level={5}>Vickee</Title>
+                <Title level={5}>Construction</Title>
                 <Paragraph className='lastweek'>
                   Done this month<span className='ml-2 text-blue-500'>40%</span>
                 </Paragraph>
               </div>
             </div>
-            <Watermark content='Vickee'>
+            <Watermark content='Construction'>
               <div style={{ height: 500 }} />
             </Watermark>
           </Card>

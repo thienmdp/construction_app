@@ -54,12 +54,13 @@ export default function TableData() {
   }
 
   const columns: TableProps<DataType>['columns'] = [
-    { title: 'Công trình', dataIndex: 'productName', key: 'productName', render: (text) => <a>{text}</a> },
-    { title: 'Chủ đầu tư', dataIndex: 'owner', key: 'owner' },
-    { title: 'Địa chỉ', dataIndex: 'address', key: 'address' },
-    { title: 'Số điện thoại', dataIndex: 'phone', key: 'phone' },
+    { title: 'Công trình', width: 200, dataIndex: 'productName', key: 'productName', render: (text) => <a>{text}</a> },
+    { title: 'Chủ đầu tư', width: 200, dataIndex: 'owner', key: 'owner' },
+    { title: 'Địa chỉ', width: 200, dataIndex: 'address', key: 'address' },
+    { title: 'Số điện thoại', width: 200, dataIndex: 'phone', key: 'phone' },
     {
       title: 'Chấm điểm',
+      width: 150,
       key: 'action',
       render: (_, record) => <a onClick={() => showDrawer(record)}>Chấm điểm</a>
     }
@@ -78,7 +79,7 @@ export default function TableData() {
           <ModalCreateConstruction onConstructionAdded={handleConstructionAdded} />
         </div>
       </div>
-      <Table columns={columns} dataSource={filterData || data} />
+      <Table columns={columns} dataSource={filterData || data} scroll={{ y: 650, x: 800 }} />
       <DrawerDetail selectedItem={selectedItem} onClose={onClose} openDrawer={openDrawer} />
     </Styled>
   )

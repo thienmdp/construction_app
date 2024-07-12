@@ -196,7 +196,7 @@ const Footer = () => {
             </li>
           </ul>
 
-          <div className='mb-4 ml-4 mr-4 text-sm text-gray-600 md:mb-0'>&copy; SHMS. All rights reserved.</div>
+          <div className='mb-4 ml-4 mr-4 text-sm text-gray-600 md:mb-0'>&copy; mdpt_. All rights reserved.</div>
         </div>
       </div>
     </footer>

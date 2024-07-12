@@ -71,7 +71,7 @@ export default function SignUp() {
     <div className='flex h-screen'>
       <Helmet>
         <title>Construction | Đăng ký</title>
-        <meta name='description' content={'Đăng ký sử dụng Vickee Application'} />
+        <meta name='description' content={'Đăng ký sử dụng Construction Application'} />
       </Helmet>
       <div className='items-center justify-center flex-1 hidden text-black bg-white lg:flex'>
         <div className='max-w-md text-center'>

@@ -25,9 +25,9 @@ export const authApi = createApi({
           console.log('DATA =>', data)
           await dispatch(setAccessToken(data.data.access_token))
           await dispatch(userApi.endpoints.getMe.initiate(null, { forceRefetch: true }))
-          Cookies.set('cokhi_isAuthenticated', 'true')
-          Cookies.set('cokhi_accessToken', data.data.access_token)
-          Cookies.set('cokhi_userRole', data.data.role)
+          Cookies.set('Construction_isAuthenticated', 'true')
+          Cookies.set('Construction_accessToken', data.data.access_token)
+          Cookies.set('Construction_userRole', data.data.role)
         } catch (error) {
           console.error('Error in loginUser:', error)
         }

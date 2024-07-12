@@ -57,7 +57,7 @@ export default function SignIn() {
     <div>
       <Helmet>
         <title>Construction | Đăng nhập</title>
-        <meta name='description' content={'Đăng nhập vào Vickee Application'} />
+        <meta name='description' content={'Đăng nhập vào Construction Application'} />
       </Helmet>
       <div className='flex h-screen'>
         <div className='items-center justify-center flex-1 hidden text-black bg-white lg:flex'>

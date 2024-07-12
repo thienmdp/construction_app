@@ -11,8 +11,8 @@ export interface InitialState {
 }
 
 const initialState: InitialState = {
-  isAuthenticated: Cookies.get('cokhi_isAuthenticated') === 'true',
-  user: Cookies.get('cokhi_currentUser') ? JSON.parse(Cookies.get('cokhi_currentUser')!) : null,
+  isAuthenticated: Cookies.get('Construction_isAuthenticated') === 'true',
+  user: Cookies.get('Construction_currentUser') ? JSON.parse(Cookies.get('Construction_currentUser')!) : null,
   access_token: getAccessToken()
 }
 const auth = createSlice({
@@ -33,10 +33,10 @@ const auth = createSlice({
       state.isAuthenticated = false
       state.user = null
       state.access_token = null
-      Cookies.remove('cokhi_currentUser')
-      Cookies.remove('cokhi_accessToken')
-      Cookies.remove('cokhi_userRole')
-      Cookies.remove('cokhi_isAuthenticated')
+      Cookies.remove('Construction_currentUser')
+      Cookies.remove('Construction_accessToken')
+      Cookies.remove('Construction_userRole')
+      Cookies.remove('Construction_isAuthenticated')
     }
   }
 })

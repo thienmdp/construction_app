@@ -17,7 +17,7 @@ export const userApi = createApi({
           const { data } = await queryFulfilled
           dispatch(setUser(data.data))
           dispatch(setAuthenticated(true))
-          Cookies.set('cokhi_currentUser', JSON.stringify(data.data))
+          Cookies.set('Construction_currentUser', JSON.stringify(data.data))
         } catch (error) {
           dispatch(setUser(null))
           dispatch(setAuthenticated(false))

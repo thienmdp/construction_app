@@ -10,12 +10,7 @@ import { logOut } from '../features/auth.slice'
 
 const baseUrl = baseURLAPI
 const mutex = new Mutex()
-const pathPublic =
-  window.location.pathname === path.register ||
-  window.location.pathname === path.landing ||
-  window.location.pathname === path.vickee ||
-  window.location.pathname === path.smentor ||
-  window.location.pathname === path.spdv
+const pathPublic = window.location.pathname === path.register || window.location.pathname === path.landing
 
 const baseQuery = fetchBaseQuery({
   baseUrl,

@@ -40,7 +40,7 @@ export const MobileMenu = () => {
             scroll.scrollToTop({ duration: 300, smooth: true }) // Scroll to top smoothly after route change
           }}
         >
-          home
+          Home
         </Link>
       ),
       icon: <HomeOutlined />,
@@ -50,7 +50,7 @@ export const MobileMenu = () => {
       key: '2',
       label: (
         <LinkScroll to={'contact'} spy={true} smooth={true} duration={300} onClick={() => setOpen(false)}>
-          contact
+          Contact
         </LinkScroll>
       ),
       icon: <ContactsOutlined />,
@@ -59,9 +59,14 @@ export const MobileMenu = () => {
     {
       key: '3',
       label: (
-        <LinkScroll to={'services'} spy={true} smooth={true} duration={300} onClick={() => setOpen(false)}>
-          services
-        </LinkScroll>
+        <Link
+          to={'/free-trial'}
+          onClick={() => {
+            setOpen(false)
+          }}
+        >
+          Free Trial
+        </Link>
       ),
       icon: <CustomerServiceOutlined />,
       children: [
@@ -69,12 +74,12 @@ export const MobileMenu = () => {
           key: '4',
           label: (
             <Link
-              to={'/vickee'}
+              to={'/free-trial'}
               onClick={() => {
                 setOpen(false)
               }}
             >
-              Vickee
+              Free Trial
             </Link>
           ),
           icon: <StarFilled />,
@@ -84,12 +89,12 @@ export const MobileMenu = () => {
           key: '5',
           label: (
             <Link
-              to={'/smentor'}
+              to={'/#'}
               onClick={() => {
                 setOpen(false)
               }}
             >
-              S.Mentor
+              Construction
             </Link>
           ),
           icon: <StarOutlined />,
@@ -99,12 +104,12 @@ export const MobileMenu = () => {
           key: '6',
           label: (
             <Link
-              to={'/spdv'}
+              to={'/#'}
               onClick={() => {
                 setOpen(false)
               }}
             >
-              Gói sản phẩm dịch vụ
+              Construction
             </Link>
           ),
           icon: <StarOutlined />,
