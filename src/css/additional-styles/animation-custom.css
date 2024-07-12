@@ -1,0 +1,121 @@
+/* Zalo zoomzoom */
+.zalozoomzoom {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  opacity: 0.5;
+  z-index: -2;
+  border-radius: 100%;
+  animation: zalozoomzoom 3s linear 0.2s infinite;
+}
+
+.zalozoomzoom:nth-child(1) {
+  animation-delay: 1.2s;
+}
+.zalozoomzoom:nth-child(1) {
+  animation-delay: 0s;
+}
+.zalozoomzoom:nth-child(3) {
+  animation-delay: 1.5s;
+}
+.zalozoomzoom:nth-child(4) {
+  animation-delay: 2.2s;
+}
+
+@keyframes zalozoomzoom {
+  0% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
+/* Card animation_border */
+.animation_border {
+  position: relative;
+  padding: 30px 60px;
+  box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.2);
+  text-decoration: none;
+  overflow: hidden;
+}
+
+.animation_border span:nth-child(1) {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(to right, #f54923, #f8cb39);
+  animation: animate1 2s linear infinite;
+}
+
+@keyframes animate1 {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.animation_border span:nth-child(2) {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 3px;
+  background: linear-gradient(to bottom, #f54923, #f8cb39);
+  animation: animate2 2s linear infinite;
+  animation-delay: 1s;
+}
+@keyframes animate2 {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+.animation_border span:nth-child(3) {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(to left, #f54923, #f8cb39);
+  animation: animate3 2s linear infinite;
+}
+
+@keyframes animate3 {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.animation_border span:nth-child(4) {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 3px;
+  background: linear-gradient(to top, #f54923, #f8cb39);
+  animation: animate4 2s linear infinite;
+  animation-delay: 1s;
+}
+
+@keyframes animate4 {
+  0% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(-100%);
+  }
+}

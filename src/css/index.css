@@ -1,0 +1,89 @@
+@import 'slick-carousel/slick/slick.css';
+@import './additional-styles/theme.css';
+@import './additional-styles/utility-patterns.css';
+@import './additional-styles/animation-custom.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #a7abb3;
+  border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #9da0a7;
+}
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+.gradient {
+  background: linear-gradient(90deg, #d53369 0%, #daae51 100%);
+}
+
+.animation-hover:after {
+  background: none repeat scroll 0 0 transparent;
+  content: '';
+  height: 2px;
+  transition:
+    width 0.3s ease 0s,
+    left 0.3s ease 0s;
+  @apply w-0 bg-orange-500 left-1/2 block bottom-0 absolute;
+}
+.animation-active:after {
+  @apply left-0 w-full;
+}
+.animation-hover:hover:after {
+  @apply left-0 w-full;
+}
+
+li.custom-list:before {
+  content: '\2022'; /* bullet point, for screen readers */
+  text-indent: -9999999px; /* move the bullet point out of sight */
+
+  width: 0.4em;
+  height: 1em;
+  background-repeat: no-repeat;
+
+  background-size: 0.4em 0.7em;
+  background-position: 0 0.3em;
+  font-size: 300%;
+  top: -0.35em;
+  @apply absolute block;
+}
+li.circle-check:before {
+  background-image: url('/assets/Icon/checklist.svg');
+  left: -0.7em;
+  top: -0.4em;
+}
+li.check:before {
+  left: -0.5em;
+  background-image: url('/assets/Icon/jam_check.svg');
+  top: -0.5em;
+  font-size: 400%;
+}
+/* Slideshow */
+.slick-dots li {
+  @apply inline-block;
+}
+.slick-dots span {
+  @apply bg-gray-500;
+}
+.slick-dots .slick-active span {
+  @apply bg-orange-500 rounded-l-full rounded-r-full w-12;
+}
+.action-none {
+  touch-action: none;
+}
+
+/* .ant-btn-primary:not([disabled]) {
+  background: #fa4017 !important;
+}
+.ant-btn-primary:not([disabled]):hover {
+  background: #fa4117c5 !important;
+} */

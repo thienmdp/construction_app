@@ -1,0 +1,45 @@
+{
+  "compilerOptions": {
+    "target": "ES6",
+    "lib": ["ESNext", "DOM", "DOM.Iterable"],
+    "jsx": "preserve",
+    "module": "ESNext",
+    "skipLibCheck": true,
+    "noEmit": true,
+    "strict": true,
+    // "composite": true,
+    // "useDefineForClassFields": true,
+    // "allowImportingTsExtensions": true,
+
+    "allowJs": true,
+    "incremental": true,
+    "esModuleInterop": true,
+
+    /* Bundler mode */
+    // "noUnusedLocals": true,
+    "strictNullChecks": true,
+    "isolatedModules": true,
+    "resolveJsonModule": true,
+    "moduleResolution": "Node",
+    // "noUnusedParameters": true,
+    // "noFallthroughCasesInSwitch": true,
+    // "forceConsistentCasingInFileNames": true,
+
+    "baseUrl": ".",
+    "paths": {
+      // "@/*": ["./src/*"],
+      "@/*": ["src/*"],
+      "@/css/*": ["src/css/*"],
+      "@/data/*": ["src/data/*"],
+      "@/utils/*": ["src/utils/*"],
+      "@/redux/*": ["src/redux/*"],
+      "@/layouts/*": ["src/layouts/*"],
+      "@/assets/*": ["public/assets/*"],
+      "@/components/*": ["src/components/*"],
+      "@/constants": ["src/constants"],
+      "@/contexts": ["src/contexts"]
+    }
+  },
+  "include": ["src"],
+  "exclude": ["node_modules"]
+}
