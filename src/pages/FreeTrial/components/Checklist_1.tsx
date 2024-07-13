@@ -1,7 +1,9 @@
 import { initialChecklist1 } from '@/data/dummy'
 import { Detail, Section } from '@/types/checklist.type'
+import { convertGrade, HandleSubmitPromise, myPromiseHandle } from '@/utils/utils'
 import { Button, InputNumber, Table, Typography } from 'antd'
 import React, { useEffect, useState } from 'react'
+import { toast } from 'react-toastify'
 
 interface Props {
   index: number
@@ -12,6 +14,7 @@ interface Props {
 export default function Checklist_1({ index, setLock, setScore }: Props) {
   const [data, setData] = useState<Section[]>(initialChecklist1)
   const [allScoresEntered, setAllScoresEntered] = useState<boolean>(false)
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     const allEntered = data.every((section) =>
@@ -68,14 +71,22 @@ export default function Checklist_1({ index, setLock, setScore }: Props) {
       0
     )
     const percentageScore = (totalAchievedScore / totalPossibleScore) * 100
-
-    console.log('Percentage Score:', percentageScore)
-    setScore(percentageScore)
-    if (percentageScore > 75) {
-      setLock(false)
-    } else {
-      setLock(true)
-    }
+    setLoading(true)
+    toast
+      .promise(myPromiseHandle(2500), {
+        pending: 'Đang xử lý...',
+        success: `Điều kiện cần thiết đạt mức ${convertGrade(percentageScore)}`,
+        error: 'Hành động thất bại 🤯'
+      })
+      .then(() => {
+        setScore(percentageScore)
+        setLoading(false)
+        if (percentageScore >= 50) {
+          setLock(false)
+        } else {
+          setLock(true)
+        }
+      })
   }
   return (
     <div className='p-4 bg-white rounded-lg shadow'>
@@ -94,7 +105,7 @@ export default function Checklist_1({ index, setLock, setScore }: Props) {
         </div>
       ))}
       <div className='text-center'>
-        <Button type='primary' onClick={handleSubmit} disabled={!allScoresEntered} className='mt-4'>
+        <Button type='primary' onClick={handleSubmit} disabled={!allScoresEntered} className='mt-4' loading={loading}>
           Submit Scores
         </Button>
       </div>

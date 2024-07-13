@@ -18,7 +18,8 @@ export const getAccessToken = () => {
 export const myPromiseHandle = (timeout: number) => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
-      const success = Math.random() > 0.5
+      // const success = Math.random() > 0.5
+      const success = true
       if (success) {
         resolve('Thành công!')
       } else {
@@ -83,10 +84,10 @@ export default function getScrollAnimation() {
 
 export const convertGrade = (score: number) => {
   if (score > 75) {
-    return 'A'
+    return '1'
   } else if (score >= 50) {
-    return 'B'
+    return '2'
   } else {
-    return 'C'
+    return '3'
   }
 }

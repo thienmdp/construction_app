@@ -1,10 +1,13 @@
 import { initialChecklist3 } from '@/data/dummy'
+import { convertGrade, myPromiseHandle } from '@/utils/utils'
 import { Button, InputNumber, Table, TableColumnsType, Typography } from 'antd'
 import React, { useEffect, useState } from 'react'
+import { toast } from 'react-toastify'
 
 interface Props {
   index: number
   setScore: (score: number) => void
+  setDataTCDG: React.Dispatch<any>
 }
 interface Detail {
   STT?: string | undefined
@@ -22,9 +25,10 @@ interface Section {
   ChiTiet: Detail[]
   key: string
 }
-export default function Checklist_3({ index, setScore }: Props) {
+export default function Checklist_3({ index, setScore, setDataTCDG }: Props) {
   const [data, setData] = useState<Section[]>(initialChecklist3)
   const [allScoresEntered, setAllScoresEntered] = useState<boolean>(false)
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     const allEntered = data.every((section) =>
@@ -124,8 +128,18 @@ export default function Checklist_3({ index, setScore }: Props) {
       0
     )
     const percentageScore = (totalAchievedScore / totalPossibleScore) * 100
-
-    setScore(percentageScore)
+    setLoading(true)
+    setDataTCDG(data)
+    toast
+      .promise(myPromiseHandle(2500), {
+        pending: 'Đang xử lý...',
+        success: `Tiêu chí đánh giá đạt mức ${convertGrade(percentageScore)}`,
+        error: 'Hành động thất bại 🤯'
+      })
+      .then(() => {
+        setScore(parseInt(percentageScore.toString()))
+        setLoading(false)
+      })
   }
 
   return (
@@ -145,7 +159,7 @@ export default function Checklist_3({ index, setScore }: Props) {
         </div>
       ))}
       <div className='text-center'>
-        <Button type='primary' onClick={handleSubmit} disabled={!allScoresEntered} className='mt-4'>
+        <Button type='primary' onClick={handleSubmit} disabled={!allScoresEntered} className='mt-4' loading={loading}>
           Submit Scores
         </Button>
       </div>

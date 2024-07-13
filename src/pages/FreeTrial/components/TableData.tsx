@@ -9,6 +9,7 @@ interface DataType {
   productName: string
   owner: string
   address: string
+  thietke: string
   phone: string
 }
 
@@ -57,12 +58,20 @@ export default function TableData() {
     { title: 'Công trình', width: 200, dataIndex: 'productName', key: 'productName', render: (text) => <a>{text}</a> },
     { title: 'Chủ đầu tư', width: 200, dataIndex: 'owner', key: 'owner' },
     { title: 'Địa chỉ', width: 200, dataIndex: 'address', key: 'address' },
-    { title: 'Số điện thoại', width: 200, dataIndex: 'phone', key: 'phone' },
     {
-      title: 'Chấm điểm',
+      title: 'Thiết kế',
+      width: 150,
+      align: 'center',
+      dataIndex: 'thietke',
+      key: 'thietke',
+      render: (text) => <p>{text || '--'}</p>
+    },
+    { title: 'Thông tin liên hệ', width: 200, dataIndex: 'phone', key: 'phone' },
+    {
+      title: 'Đánh giá',
       width: 150,
       key: 'action',
-      render: (_, record) => <a onClick={() => showDrawer(record)}>Chấm điểm</a>
+      render: (_, record) => <a onClick={() => showDrawer(record)}>Đánh giá</a>
     }
   ]
 

@@ -59,6 +59,9 @@ export default function ModalCreateConstruction({ onConstructionAdded }: any) {
             <Form.Item name='owner' rules={[{ required: true, message: 'Chủ đầu tư không được để trống' }]}>
               <Input label='Chủ đầu tư:' placeholder='Chủ đầu tư' classNameError='hidden' autoComplete='on' />
             </Form.Item>
+            <Form.Item name='thietke'>
+              <Input label='Thiết kế:' placeholder='Thiết kế' classNameError='hidden' autoComplete='on' />
+            </Form.Item>
             <div className='grid grid-cols-2 gap-x-4'>
               <Form.Item name='address'>
                 <Input label='Điạ chỉ:' placeholder='Địa chỉ' classNameError='hidden' autoComplete='on' />
