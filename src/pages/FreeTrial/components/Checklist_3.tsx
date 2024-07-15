@@ -138,7 +138,8 @@ export default function Checklist_3({ index, setScore, setDataTCDG }: Props) {
     )
     console.log('totalPossibleScore', totalPossibleScore)
     console.log('totalAchievedScore', totalAchievedScore)
-    const percentageScore = (totalAchievedScore / totalPossibleScore) * 100
+    const percentageScore = (totalAchievedScore / 101) * 100
+    // const percentageScore = (totalAchievedScore / totalPossibleScore) * 100
     setLoading(true)
     setDataTCDG(data)
     toast

@@ -30,7 +30,9 @@ interface Section {
 
 export default function Checklist_4({ index, setScore, dataTCDG }: Props) {
   const [data, setData] = useState<Section[]>([])
-  const [allScoresEntered, setAllScoresEntered] = useState<boolean>(false)
+  const [totalScore, setTotalScore] = useState(0)
+
+  // const [allScoresEntered, setAllScoresEntered] = useState<boolean>(false)
   useEffect(() => {
     if (dataTCDG && dataTCDG[0].ChiTiet) {
       const newData = dataTCDG.map((section: any) => ({
@@ -50,13 +52,25 @@ export default function Checklist_4({ index, setScore, dataTCDG }: Props) {
     }
   }, [dataTCDG])
   useEffect(() => {
-    if (data && data[0]?.ChiTiet) {
-      const allEntered = data.every((section) =>
-        section.ChiTiet.every((detail) => detail.DiemMoi !== null && detail.difficulty !== null && detail.cost !== null)
-      )
-      setAllScoresEntered(allEntered)
-    }
+    const total = data.reduce(
+      (totalAcc, section) =>
+        totalAcc +
+        section.ChiTiet.reduce(
+          (sectionAcc, detail) => sectionAcc + (detail.DiemMoi !== null ? detail.DiemMoi : detail.DiemCu),
+          0
+        ),
+      0
+    )
+    setTotalScore(total)
   }, [data])
+  // useEffect(() => {
+  //   if (data && data[0]?.ChiTiet) {
+  //     const allEntered = data.every((section) =>
+  //       section.ChiTiet.every((detail) => detail.DiemMoi !== null && detail.difficulty !== null && detail.cost !== null)
+  //     )
+  //     setAllScoresEntered(allEntered)
+  //   }
+  // }, [data])
 
   const mapScoreToSolutions = (item: string, newScore: number | null) => {
     if (newScore === null) return { solutions: [], difficulty: '', cost: '' }
@@ -162,12 +176,22 @@ export default function Checklist_4({ index, setScore, dataTCDG }: Props) {
   ]
 
   const handleSubmit = () => {
-    const totalPossibleScore = data.reduce((acc, section) => acc + section.ChiTiet.length * 3, 0)
+    // const totalPossibleScore = data.reduce((acc, section) => acc + section.ChiTiet.length * 3, 0)
+    // const totalAchievedScore = data.reduce(
+    //   (acc, section) => acc + section.ChiTiet.reduce((accDetail, detail) => accDetail + (detail.DiemMoi ?? 0), 0),
+    //   0
+    // )
     const totalAchievedScore = data.reduce(
-      (acc, section) => acc + section.ChiTiet.reduce((accDetail, detail) => accDetail + (detail.DiemMoi ?? 0), 0),
+      (acc, section) =>
+        acc +
+        section.ChiTiet.reduce(
+          (accDetail, detail) => accDetail + (detail.DiemMoi !== null ? detail.DiemMoi : detail.DiemCu),
+          0
+        ),
       0
     )
-    const percentageScore = (totalAchievedScore / totalPossibleScore) * 100
+    const percentageScore = (totalAchievedScore / 101) * 100
+    // const percentageScore = (totalAchievedScore / totalPossibleScore) * 100
 
     toast
       .promise(myPromiseHandle(2500), {
@@ -196,8 +220,16 @@ export default function Checklist_4({ index, setScore, dataTCDG }: Props) {
           />
         </div>
       ))}
+      <Typography.Title level={4} className='mt-4'>
+        Total Score: {totalScore}
+      </Typography.Title>
       <div className='text-center'>
-        <Button type='primary' onClick={handleSubmit} disabled={!allScoresEntered} className='mt-4'>
+        <Button
+          type='primary'
+          onClick={handleSubmit}
+          // disabled={!allScoresEntered}
+          className='mt-4'
+        >
           Submit Scores
         </Button>
       </div>

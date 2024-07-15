@@ -88,7 +88,7 @@ export default function DrawerDetail({ selectedItem, onClose, openDrawer }: any)
             <Card title='Kết quả'>
               <div>
                 {scores[parseInt(checklistCurrent) - 1].percent === 0 && <p>Chưa có điểm...</p>}
-                {scores[parseInt(checklistCurrent) - 1].percent !== 0 && (
+                {/* {scores[parseInt(checklistCurrent) - 1].percent !== 0 && (
                   <p className='pb-4'>
                     Công trình của bạn đạt{' '}
                     <b>
@@ -96,10 +96,31 @@ export default function DrawerDetail({ selectedItem, onClose, openDrawer }: any)
                       {scores[parseInt(checklistCurrent) - 1].percent}%
                     </b>
                   </p>
+                )} */}
+                {scores[parseInt(checklistCurrent) - 1].percent !== 0 && (
+                  <p className='pb-4'>
+                    Công trình của bạn đạt <b>tỷ lệ {scores[parseInt(checklistCurrent) - 1].percent}%</b>
+                  </p>
                 )}
                 {scores[parseInt(checklistCurrent) - 1].score !== 0 && (
                   <p className='pb-4'>
                     Điểm số: <b>{scores[parseInt(checklistCurrent) - 1].score}</b>
+                  </p>
+                )}
+                {scores[parseInt(checklistCurrent) - 1].score !== 0 && (
+                  <p className='pb-4'>
+                    Mức hiệu quả năng lượng:{' '}
+                    <b>
+                      {scores[parseInt(checklistCurrent) - 1].score < 50 && 'Không đạt'}
+                      {scores[parseInt(checklistCurrent) - 1].score === 51 && 'Đạt'}
+                      {scores[parseInt(checklistCurrent) - 1].score >= 52 &&
+                        scores[parseInt(checklistCurrent) - 1].score <= 65 &&
+                        'Đạt hạng bạc (Silver)'}
+                      {scores[parseInt(checklistCurrent) - 1].score >= 66 &&
+                        scores[parseInt(checklistCurrent) - 1].score <= 80 &&
+                        'Đạt hạng vàng (Gold)'}
+                      {scores[parseInt(checklistCurrent) - 1].score >= 81 && 'Đạt hạng bạch kim (Platinum)'}
+                    </b>
                   </p>
                 )}
               </div>
@@ -117,7 +138,6 @@ export default function DrawerDetail({ selectedItem, onClose, openDrawer }: any)
             </div>
             {checklistCurrent === '3' && (
               <div className='flex items-center justify-between w-full'>
-                <p>Bảng quy đổi đánh giá mức hiệu quả</p>
                 <Tooltip title='Bảng quy đổi đánh giá mức hiệu quả'>
                   <Popover
                     content={
@@ -161,21 +181,21 @@ export default function DrawerDetail({ selectedItem, onClose, openDrawer }: any)
                             <td className='px-6 py-4'>51-65</td>
                             <td className='px-6 py-4'>50- dưới 65%</td>
                             <td className='px-6 py-4'>Dựa trên KQ mở phòng</td>
-                            <td className='px-6 py-4'>Trung bình</td>
+                            <td className='px-6 py-4'>Đạt HQNL hạng Bạc (Silver)</td>
                           </tr>
                           <tr className='border-b bg-gray-50'>
                             <td className='px-6 py-4'>4</td>
                             <td className='px-6 py-4'>66-80</td>
                             <td className='px-6 py-4'>65- dưới 80%</td>
                             <td className='px-6 py-4'>Dựa trên KQ mở phòng</td>
-                            <td className='px-6 py-4'>Khá</td>
+                            <td className='px-6 py-4'>Đạt HQNL hạng Vàng (Gold)</td>
                           </tr>
                           <tr className='bg-white'>
                             <td className='px-6 py-4'>5</td>
                             <td className='px-6 py-4'>81-101</td>
                             <td className='px-6 py-4'>80-100%</td>
                             <td className='px-6 py-4'>Dựa trên KQ mở phòng</td>
-                            <td className='px-6 py-4'>Tốt</td>
+                            <td className='px-6 py-4'>Đạt HQNL hạng Bạch kim (Platium)</td>
                           </tr>
                         </tbody>
                       </div>
@@ -183,7 +203,9 @@ export default function DrawerDetail({ selectedItem, onClose, openDrawer }: any)
                     trigger='click'
                     placement='bottomLeft'
                     arrow={false}
+                    className='flex items-center justify-between w-full cursor-pointer'
                   >
+                    <p>Bảng quy đổi đánh giá mức hiệu quả</p>
                     <InfoCircleOutlined />
                   </Popover>
                 </Tooltip>
@@ -191,8 +213,7 @@ export default function DrawerDetail({ selectedItem, onClose, openDrawer }: any)
             )}
             {checklistCurrent === '4' && (
               <div className='flex items-center justify-between w-full'>
-                <p>Bảng quy đổi định hướng giải pháp</p>
-                <Tooltip title='Bảng quy đổi định hướng giải pháp'>
+                <Tooltip title='Bảng quy đổi đánh giá mức hiệu quả'>
                   <Popover
                     content={
                       <div className='w-full text-sm text-left text-gray-500 table-auto'>
@@ -235,21 +256,21 @@ export default function DrawerDetail({ selectedItem, onClose, openDrawer }: any)
                             <td className='px-6 py-4'>51-65</td>
                             <td className='px-6 py-4'>50- dưới 65%</td>
                             <td className='px-6 py-4'>Dựa trên KQ mở phòng</td>
-                            <td className='px-6 py-4'>Trung bình</td>
+                            <td className='px-6 py-4'>Đạt HQNL hạng Bạc (Silver)</td>
                           </tr>
                           <tr className='border-b bg-gray-50'>
                             <td className='px-6 py-4'>4</td>
                             <td className='px-6 py-4'>66-80</td>
                             <td className='px-6 py-4'>65- dưới 80%</td>
                             <td className='px-6 py-4'>Dựa trên KQ mở phòng</td>
-                            <td className='px-6 py-4'>Khá</td>
+                            <td className='px-6 py-4'>Đạt HQNL hạng Vàng (Gold)</td>
                           </tr>
                           <tr className='bg-white'>
                             <td className='px-6 py-4'>5</td>
                             <td className='px-6 py-4'>81-101</td>
                             <td className='px-6 py-4'>80-100%</td>
                             <td className='px-6 py-4'>Dựa trên KQ mở phòng</td>
-                            <td className='px-6 py-4'>Tốt</td>
+                            <td className='px-6 py-4'>Đạt HQNL hạng Bạch kim (Platium)</td>
                           </tr>
                         </tbody>
                       </div>
@@ -257,7 +278,9 @@ export default function DrawerDetail({ selectedItem, onClose, openDrawer }: any)
                     trigger='click'
                     placement='bottomLeft'
                     arrow={false}
+                    className='flex items-center justify-between w-full cursor-pointer'
                   >
+                    <p>Bảng quy đổi đánh giá mức hiệu quả</p>
                     <InfoCircleOutlined />
                   </Popover>
                 </Tooltip>
