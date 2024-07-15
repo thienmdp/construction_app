@@ -137,7 +137,7 @@ export const Header = () => {
                   to={'/sign-in'}
                   onClick={() => scroll.scrollToTop({ duration: 300, smooth: true })}
                 >
-                  login
+                  Login
                 </Link>
               )}
             </span>

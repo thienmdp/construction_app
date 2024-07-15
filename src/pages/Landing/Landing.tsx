@@ -17,8 +17,8 @@ export default function Landing() {
       </Helmet>
       <div className='max-w-screen-xl min-h-screen px-8 mx-auto xl:px-16'>
         <Hero />
-        <Feature />
-        <Pricing />
+        {/* <Feature /> */}
+        {/* <Pricing /> */}
       </div>
     </>
   )
