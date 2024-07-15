@@ -6,19 +6,26 @@ import React, { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 interface Props {
   index: number
-  setScore: (score: number) => void
+  setScore: (score: number, percent: number) => void
 }
 
 export default function Checklist_2({ index, setScore }: Props) {
   const [data, setData] = useState<Section[]>(initialChecklist2)
   const [allScoresEntered, setAllScoresEntered] = useState<boolean>(false)
   const [loading, setLoading] = useState(false)
+  const [totalScore, setTotalScore] = useState(0)
 
   useEffect(() => {
     const allEntered = data.every((section) =>
       section.ChiTiet.every((detail) => detail.Diem !== null && detail.Diem >= 0)
     )
     setAllScoresEntered(allEntered)
+
+    const total = data.reduce(
+      (acc, section) => acc + section.ChiTiet.reduce((accDetail, detail) => accDetail + (detail.Diem || 0), 0),
+      0
+    )
+    setTotalScore(total)
   }, [data])
 
   const handleScoreChange = (value: number | null, item: string, sectionKey: string | undefined) => {
@@ -80,7 +87,7 @@ export default function Checklist_2({ index, setScore }: Props) {
         error: 'Hành động thất bại 🤯'
       })
       .then(() => {
-        setScore(percentageScore)
+        setScore(totalAchievedScore, percentageScore)
         setLoading(false)
       })
   }
@@ -101,6 +108,9 @@ export default function Checklist_2({ index, setScore }: Props) {
           />
         </div>
       ))}
+      <Typography.Title level={4} className='mt-4'>
+        Total Score: {totalScore}
+      </Typography.Title>
       <div className='text-center'>
         <Button type='primary' onClick={handleSubmit} disabled={!allScoresEntered} className='mt-4' loading={loading}>
           Submit Scores

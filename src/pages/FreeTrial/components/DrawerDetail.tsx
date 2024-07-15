@@ -1,4 +1,4 @@
-import { Card, Drawer, Tabs } from 'antd'
+import { Card, Drawer, Popover, Tabs, Tooltip } from 'antd'
 import React, { useState } from 'react'
 import Checklist_1 from './Checklist_1'
 import Checklist_2 from './Checklist_2'
@@ -10,12 +10,17 @@ import { InfoCircleOutlined } from '@ant-design/icons'
 export default function DrawerDetail({ selectedItem, onClose, openDrawer }: any) {
   const [lock, setlock] = useState<boolean>(true)
   const [checklistCurrent, setchecklistCurrent] = useState<string>('1')
-  const [scores, setScores] = useState([0, 0, 0, 0])
-  const [dataTCDG, setDataTCDG] = useState<any>()
+  const [scores, setScores] = useState([
+    { score: 0, percent: 0 },
+    { score: 0, percent: 0 },
+    { score: 0, percent: 0 },
+    { score: 0, percent: 0 }
+  ])
+  const [dataTCDG, setDataTCDG] = useState<[]>()
 
-  const updateScore = (index: number, score: number) => {
+  const updateScore = (index: number, score: number, percent: number) => {
     const newScores = [...scores]
-    newScores[index] = score
+    newScores[index] = { score: score, percent: percent }
     setScores(newScores)
   }
 
@@ -23,28 +28,48 @@ export default function DrawerDetail({ selectedItem, onClose, openDrawer }: any)
     {
       label: 'Điều kiện cần thiết',
       key: '1',
-      children: <Checklist_1 index={0} setLock={setlock} setScore={(score: number) => updateScore(0, score)} />
+      children: (
+        <Checklist_1
+          index={0}
+          setLock={setlock}
+          setScore={(score: number, percent: number) => updateScore(0, score, percent)}
+        />
+      )
     },
     {
       label: 'Điều kiện xem xét',
       key: '2',
-      children: <Checklist_2 index={1} setScore={(score: number) => updateScore(1, score)} />,
+      children: <Checklist_2 index={1} setScore={(score: number, percent: number) => updateScore(1, score, percent)} />,
       disabled: lock
     },
     {
-      label: 'Tiêu chí đánh giá',
+      label: 'Đánh giá tích hợp',
       key: '3',
-      children: <Checklist_3 index={2} setScore={(score: number) => updateScore(2, score)} setDataTCDG={setDataTCDG} />,
+      children: (
+        <Checklist_3
+          index={2}
+          setScore={(score: number, percent: number) => updateScore(2, score, percent)}
+          setDataTCDG={setDataTCDG}
+        />
+      ),
       disabled: lock
     },
     {
       label: 'Định hướng giải pháp',
       key: '4',
-      children: <Checklist_4 index={3} setScore={(score: number) => updateScore(3, score)} dataTCDG={dataTCDG} />,
+      children: (
+        <Checklist_4
+          index={3}
+          setScore={(score: number, percent: number) => updateScore(3, score, percent)}
+          dataTCDG={dataTCDG}
+        />
+      ),
       disabled: lock
     }
   ]
-
+  console.log('checklistCurrent', checklistCurrent)
+  console.log('scores', scores)
+  console.log('dataTCDG', dataTCDG)
   return (
     <>
       <Drawer title='Đánh giá mức HQNL của công trình”' width={'100%'} onClose={onClose} open={openDrawer}>
@@ -62,14 +87,19 @@ export default function DrawerDetail({ selectedItem, onClose, openDrawer }: any)
             </Card>
             <Card title='Kết quả'>
               <div>
-                {scores[parseInt(checklistCurrent) - 1] === 0 && <p>Chưa có điểm...</p>}
-                {scores[parseInt(checklistCurrent) - 1] !== 0 && (
+                {scores[parseInt(checklistCurrent) - 1].percent === 0 && <p>Chưa có điểm...</p>}
+                {scores[parseInt(checklistCurrent) - 1].percent !== 0 && (
                   <p className='pb-4'>
                     Công trình của bạn đạt{' '}
                     <b>
-                      Mức {convertGrade(scores[parseInt(checklistCurrent) - 1])} với{' '}
-                      {scores[parseInt(checklistCurrent) - 1]}%
+                      Mức {convertGrade(scores[parseInt(checklistCurrent) - 1].percent)} với{' '}
+                      {scores[parseInt(checklistCurrent) - 1].percent}%
                     </b>
+                  </p>
+                )}
+                {scores[parseInt(checklistCurrent) - 1].score !== 0 && (
+                  <p className='pb-4'>
+                    Điểm số: <b>{scores[parseInt(checklistCurrent) - 1].score}</b>
                   </p>
                 )}
               </div>
@@ -85,6 +115,154 @@ export default function DrawerDetail({ selectedItem, onClose, openDrawer }: any)
                 <li className='mb-1'>- Mức 3: Dưới 50% số điểm</li>
               </ul>
             </div>
+            {checklistCurrent === '3' && (
+              <div className='flex items-center justify-between w-full'>
+                <p>Bảng quy đổi đánh giá mức hiệu quả</p>
+                <Tooltip title='Bảng quy đổi đánh giá mức hiệu quả'>
+                  <Popover
+                    content={
+                      <div className='w-full text-sm text-left text-gray-500 table-auto'>
+                        <thead className='text-xs text-gray-700 uppercase bg-gray-50'>
+                          <tr>
+                            <th scope='col' className='px-6 py-3 '>
+                              TT
+                            </th>
+                            <th scope='col' className='py-3 min-w-[100px]'>
+                              KẾT QUẢ (Điểm)
+                            </th>
+                            <th scope='col' className='px-6 py-3 min-w-[120px]'>
+                              TỈ LỆ (%)
+                            </th>
+                            <th scope='col' className='px-6 py-3 min-w-[220px]'>
+                              MỨC GIẢM DMNL (kWh/m2/năm)
+                            </th>
+                            <th scope='col' className='px-6 py-3 min-w-[150px]'>
+                              MỨC HQNL
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr className='bg-white border-b'>
+                            <td className='px-6 py-4'>1</td>
+                            <td className='px-6 py-4'>0-50</td>
+                            <td className='px-6 py-4'>Dưới 50%</td>
+                            <td className='px-6 py-4'>Dựa trên KQ mở phòng</td>
+                            <td className='px-6 py-4'>Không đạt</td>
+                          </tr>
+                          <tr className='border-b bg-gray-50'>
+                            <td className='px-6 py-4'>2</td>
+                            <td className='px-6 py-4'>51</td>
+                            <td className='px-6 py-4'>50%</td>
+                            <td className='px-6 py-4'>Dựa trên KQ mở phòng</td>
+                            <td className='px-6 py-4'>Đạt</td>
+                          </tr>
+                          <tr className='bg-white border-b'>
+                            <td className='px-6 py-4'>3</td>
+                            <td className='px-6 py-4'>51-65</td>
+                            <td className='px-6 py-4'>50- dưới 65%</td>
+                            <td className='px-6 py-4'>Dựa trên KQ mở phòng</td>
+                            <td className='px-6 py-4'>Trung bình</td>
+                          </tr>
+                          <tr className='border-b bg-gray-50'>
+                            <td className='px-6 py-4'>4</td>
+                            <td className='px-6 py-4'>66-80</td>
+                            <td className='px-6 py-4'>65- dưới 80%</td>
+                            <td className='px-6 py-4'>Dựa trên KQ mở phòng</td>
+                            <td className='px-6 py-4'>Khá</td>
+                          </tr>
+                          <tr className='bg-white'>
+                            <td className='px-6 py-4'>5</td>
+                            <td className='px-6 py-4'>81-101</td>
+                            <td className='px-6 py-4'>80-100%</td>
+                            <td className='px-6 py-4'>Dựa trên KQ mở phòng</td>
+                            <td className='px-6 py-4'>Tốt</td>
+                          </tr>
+                        </tbody>
+                      </div>
+                    }
+                    trigger='click'
+                    placement='bottomLeft'
+                    arrow={false}
+                  >
+                    <InfoCircleOutlined />
+                  </Popover>
+                </Tooltip>
+              </div>
+            )}
+            {checklistCurrent === '4' && (
+              <div className='flex items-center justify-between w-full'>
+                <p>Bảng quy đổi định hướng giải pháp</p>
+                <Tooltip title='Bảng quy đổi định hướng giải pháp'>
+                  <Popover
+                    content={
+                      <div className='w-full text-sm text-left text-gray-500 table-auto'>
+                        <thead className='text-xs text-gray-700 uppercase bg-gray-50'>
+                          <tr>
+                            <th scope='col' className='px-6 py-3 '>
+                              TT
+                            </th>
+                            <th scope='col' className='py-3 min-w-[100px]'>
+                              KẾT QUẢ (Điểm)
+                            </th>
+                            <th scope='col' className='px-6 py-3 min-w-[120px]'>
+                              TỈ LỆ (%)
+                            </th>
+                            <th scope='col' className='px-6 py-3 min-w-[220px]'>
+                              MỨC GIẢM DMNL (kWh/m2/năm)
+                            </th>
+                            <th scope='col' className='px-6 py-3 min-w-[150px]'>
+                              MỨC HQNL
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr className='bg-white border-b'>
+                            <td className='px-6 py-4'>1</td>
+                            <td className='px-6 py-4'>0-50</td>
+                            <td className='px-6 py-4'>Dưới 50%</td>
+                            <td className='px-6 py-4'>Dựa trên KQ mở phòng</td>
+                            <td className='px-6 py-4'>Không đạt</td>
+                          </tr>
+                          <tr className='border-b bg-gray-50'>
+                            <td className='px-6 py-4'>2</td>
+                            <td className='px-6 py-4'>51</td>
+                            <td className='px-6 py-4'>50%</td>
+                            <td className='px-6 py-4'>Dựa trên KQ mở phòng</td>
+                            <td className='px-6 py-4'>Đạt</td>
+                          </tr>
+                          <tr className='bg-white border-b'>
+                            <td className='px-6 py-4'>3</td>
+                            <td className='px-6 py-4'>51-65</td>
+                            <td className='px-6 py-4'>50- dưới 65%</td>
+                            <td className='px-6 py-4'>Dựa trên KQ mở phòng</td>
+                            <td className='px-6 py-4'>Trung bình</td>
+                          </tr>
+                          <tr className='border-b bg-gray-50'>
+                            <td className='px-6 py-4'>4</td>
+                            <td className='px-6 py-4'>66-80</td>
+                            <td className='px-6 py-4'>65- dưới 80%</td>
+                            <td className='px-6 py-4'>Dựa trên KQ mở phòng</td>
+                            <td className='px-6 py-4'>Khá</td>
+                          </tr>
+                          <tr className='bg-white'>
+                            <td className='px-6 py-4'>5</td>
+                            <td className='px-6 py-4'>81-101</td>
+                            <td className='px-6 py-4'>80-100%</td>
+                            <td className='px-6 py-4'>Dựa trên KQ mở phòng</td>
+                            <td className='px-6 py-4'>Tốt</td>
+                          </tr>
+                        </tbody>
+                      </div>
+                    }
+                    trigger='click'
+                    placement='bottomLeft'
+                    arrow={false}
+                  >
+                    <InfoCircleOutlined />
+                  </Popover>
+                </Tooltip>
+              </div>
+            )}
           </div>
           <div className='col-span-1 sm:col-span-2'>
             <Tabs defaultActiveKey={checklistCurrent} type='card' items={itemsTab} onChange={setchecklistCurrent} />

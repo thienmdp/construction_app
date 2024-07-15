@@ -1,25 +1,24 @@
-import { initialChecklist4 } from '@/data/dummy'
+import { improvementSolutions } from '@/data/dummy'
 import { convertGrade, myPromiseHandle } from '@/utils/utils'
-import { Button, InputNumber, Table, Typography, Select } from 'antd'
+import { Button, InputNumber, Table, Typography, Select, TableColumnsType } from 'antd'
 import React, { useEffect, useState, useRef } from 'react'
 import { toast } from 'react-toastify'
-
-const { Option } = Select
 
 interface Props {
   index: number
   dataTCDG: any
-  setScore: (score: number) => void
+  setScore: (score: number, percent: number) => void
 }
 
 interface Detail {
-  STT?: string | undefined
+  STT?: string
   item: string
   DiemCu: number
   DiemMoi: number | null
-  MucDo: string | null
-  ChiPhi: string | null
-  sectionKey?: string | undefined
+  difficulty: string | null
+  cost: string | null
+  sectionKey?: string
+  GiaiPhapCaiTien: string[]
 }
 
 interface Section {
@@ -30,62 +29,84 @@ interface Section {
 }
 
 export default function Checklist_4({ index, setScore, dataTCDG }: Props) {
-  const initialData = dataTCDG.map((section: any) => ({
-    ...section,
-    ChiTiet: section.ChiTiet.map((detail: any) => ({
-      STT: detail.STT,
-      item: detail.item,
-      DiemCu: detail.total,
-      DiemMoi: null,
-      MucDo: null,
-      ChiPhi: null,
-      sectionKey: section.key
-    }))
-  }))
-
-  const [data, setData] = useState<Section[]>(initialData)
+  const [data, setData] = useState<Section[]>([])
   const [allScoresEntered, setAllScoresEntered] = useState<boolean>(false)
-  const drawerRef = useRef<HTMLDivElement>(null)
   useEffect(() => {
-    const allEntered = data.every((section) =>
-      section.ChiTiet.every((detail) => detail.DiemMoi !== null && detail.MucDo !== null && detail.ChiPhi !== null)
-    )
-    setAllScoresEntered(allEntered)
+    if (dataTCDG && dataTCDG[0].ChiTiet) {
+      const newData = dataTCDG.map((section: any) => ({
+        ...section,
+        ChiTiet: section.ChiTiet.map((detail: any) => ({
+          STT: detail.STT,
+          item: detail.item,
+          DiemCu: detail.total,
+          DiemMoi: null,
+          difficulty: null,
+          cost: null,
+          GiaiPhapCaiTien: [],
+          sectionKey: section.key
+        }))
+      }))
+      setData(newData)
+    }
+  }, [dataTCDG])
+  useEffect(() => {
+    if (data && data[0]?.ChiTiet) {
+      const allEntered = data.every((section) =>
+        section.ChiTiet.every((detail) => detail.DiemMoi !== null && detail.difficulty !== null && detail.cost !== null)
+      )
+      setAllScoresEntered(allEntered)
+    }
   }, [data])
 
-  const handleScoreChange = (value: number | null, item: string, sectionKey: string | undefined, field: string) => {
+  const mapScoreToSolutions = (item: string, newScore: number | null) => {
+    if (newScore === null) return { solutions: [], difficulty: '', cost: '' }
+
+    const conditions = improvementSolutions[item] || []
+    let selectedSolution: { solutions: string[]; difficulty: string; cost: string } = {
+      solutions: [],
+      difficulty: '',
+      cost: ''
+    }
+
+    conditions.forEach((condition) => {
+      if (newScore >= condition.threshold) {
+        selectedSolution = {
+          solutions: condition.solutions,
+          difficulty: condition.difficulty,
+          cost: condition.cost
+        }
+      }
+    })
+
+    return selectedSolution
+  }
+
+  const handleScoreChange = (value: number | null, item: string, sectionKey?: string) => {
+    if (!sectionKey) {
+      console.error('No sectionKey provided for', item)
+      return
+    }
+
     const newData = data.map((section) => {
       if (section.key === sectionKey) {
-        const newChiTiet = section.ChiTiet.map((detail) => {
-          if (detail.item === item) {
-            return { ...detail, [field]: value }
-          }
-          return detail
-        })
-        return { ...section, ChiTiet: newChiTiet }
+        return {
+          ...section,
+          ChiTiet: section.ChiTiet.map((detail) => {
+            if (detail.item === item) {
+              const { solutions, difficulty, cost } = mapScoreToSolutions(item, value)
+              return { ...detail, DiemMoi: value, GiaiPhapCaiTien: solutions, difficulty, cost }
+            }
+            return detail
+          })
+        }
       }
       return section
     })
+
     setData(newData)
   }
 
-  const handleSelectChange = (value: string | null, item: string, sectionKey: string | undefined, field: string) => {
-    const newData = data.map((section) => {
-      if (section.key === sectionKey) {
-        const newChiTiet = section.ChiTiet.map((detail) => {
-          if (detail.item === item) {
-            return { ...detail, [field]: value }
-          }
-          return detail
-        })
-        return { ...section, ChiTiet: newChiTiet }
-      }
-      return section
-    })
-    setData(newData)
-  }
-
-  const columns = [
+  const columns: TableColumnsType<Detail> = [
     {
       title: 'STT',
       dataIndex: 'STT',
@@ -99,7 +120,9 @@ export default function Checklist_4({ index, setScore, dataTCDG }: Props) {
     {
       title: 'Điểm Cũ',
       dataIndex: 'DiemCu',
-      key: 'DiemCu'
+      key: 'DiemCu',
+      width: 100,
+      align: 'center'
     },
     {
       title: 'Điểm Mới',
@@ -109,50 +132,37 @@ export default function Checklist_4({ index, setScore, dataTCDG }: Props) {
           min={0}
           max={3}
           value={record.DiemMoi}
-          onChange={(value) => handleScoreChange(value, record.item, record?.sectionKey, 'DiemMoi')}
+          onChange={(value) => {
+            if (record.sectionKey) {
+              handleScoreChange(value, record.item, record.sectionKey)
+            }
+          }}
           className='w-full'
         />
       )
     },
     {
+      title: 'Giải Pháp Cải Tiến',
+      dataIndex: 'GiaiPhapCaiTien',
+      key: 'GiaiPhapCaiTien',
+      render: (solutions: string[]) => solutions.map((solution, index) => <div key={index}>{solution}</div>)
+    },
+    {
       title: 'Mức Độ',
-      key: 'MucDo',
       width: 100,
-      render: (text: any, record: Detail) => (
-        <Select
-          value={record.MucDo}
-          onChange={(value) => handleSelectChange(value, record.item, record?.sectionKey, 'MucDo')}
-          className='w-full'
-        >
-          <Option value='Dễ'>Dễ</Option>
-          <Option value='Khó'>Khó</Option>
-        </Select>
-      )
+      dataIndex: 'difficulty',
+      key: 'difficulty'
     },
     {
       title: 'Chi Phí',
-      key: 'ChiPhi',
-      width: 150,
-      render: (text: any, record: Detail) => (
-        <Select
-          value={record.ChiPhi}
-          onChange={(value) => handleSelectChange(value, record.item, record?.sectionKey, 'ChiPhi')}
-          className='w-full'
-        >
-          <Option value='Thấp'>Thấp</Option>
-          <Option value='Trung bình'>Trung bình</Option>
-          <Option value='Cao'>Cao</Option>
-        </Select>
-      )
+      width: 100,
+      dataIndex: 'cost',
+      key: 'cost'
     }
   ]
 
   const handleSubmit = () => {
-    if (drawerRef.current) {
-      drawerRef.current.scrollTo({ top: 0, behavior: 'smooth' })
-    }
-
-    const totalPossibleScore = data.reduce((acc, section) => acc + section.ChiTiet.length * 3, 0) // Assuming each new score can be max 3
+    const totalPossibleScore = data.reduce((acc, section) => acc + section.ChiTiet.length * 3, 0)
     const totalAchievedScore = data.reduce(
       (acc, section) => acc + section.ChiTiet.reduce((accDetail, detail) => accDetail + (detail.DiemMoi ?? 0), 0),
       0
@@ -166,20 +176,20 @@ export default function Checklist_4({ index, setScore, dataTCDG }: Props) {
         error: 'Hành động thất bại 🤯'
       })
       .then(() => {
-        setScore(parseInt(percentageScore.toString()))
+        setScore(totalAchievedScore, parseInt(percentageScore.toString()))
       })
   }
 
   return (
-    <div ref={drawerRef} className='p-4 bg-white rounded-lg shadow' style={{ maxHeight: '100vh', overflowY: 'auto' }}>
-      {data.map((section) => (
+    <div className='p-4 bg-white rounded-lg shadow' style={{ maxHeight: '100vh', overflowY: 'auto' }}>
+      {data?.map((section) => (
         <div key={section.key} className='mb-5'>
           <Typography.Title level={4} className='mb-2'>
             {section.STT}. {section.NoiDung}
           </Typography.Title>
           <Table
             columns={columns}
-            dataSource={section.ChiTiet.map((item) => ({ ...item, sectionKey: section.key }))}
+            dataSource={section?.ChiTiet?.map((item) => ({ ...item, sectionKey: section.key }))}
             pagination={false}
             rowKey='item'
             bordered

@@ -174,7 +174,7 @@ export const initialChecklist3 = [
       },
       {
         STT: '9',
-        item: 'Giải pháp kiểm soát việc thông gió tự nhiên',
+        item: 'Giải pháp kiểm soát thông gió tự nhiên',
         Diem1: null,
         Diem2: null,
         Diem3: null,
@@ -182,7 +182,7 @@ export const initialChecklist3 = [
       },
       {
         STT: '10',
-        item: 'Giải pháp tăng hiệu quả thông gió tự nhiên',
+        item: 'Giải pháp tăng cường hiệu quả thông gió',
         Diem1: null,
         Diem2: null,
         Diem3: null,
@@ -197,7 +197,7 @@ export const initialChecklist3 = [
     ChiTiet: [
       {
         STT: '11',
-        item: 'Sự dụng ánh sáng tán xạ để chiếu sáng tự nhiên',
+        item: 'Sử dụng ánh sáng tán xạ để chiếu sáng tự nhiên',
         Diem1: null,
         Diem2: null,
         Diem3: null,
@@ -213,7 +213,7 @@ export const initialChecklist3 = [
       },
       {
         STT: '13',
-        item: 'Bố trí không gian chính về hướng Bắc - Nam',
+        item: 'Hướng cửa lấy sáng mở về hướng Bắc/Nam',
         Diem1: null,
         Diem2: null,
         Diem3: null,
@@ -221,7 +221,7 @@ export const initialChecklist3 = [
       },
       {
         STT: '14',
-        item: 'Giải pháp "lọc" ánh sáng cho hướng chiếu sáng bất lợi (có trực xạ)',
+        item: "Giải pháp 'lọc' ánh sáng cho hướng chiếu sáng bất lợi (có trực xạ)",
         Diem1: null,
         Diem2: null,
         Diem3: null,
@@ -229,7 +229,7 @@ export const initialChecklist3 = [
       },
       {
         STT: '15',
-        item: 'Diện tích cửa lấy sáng đảm bảo CSTN (Scs=1/5Ss)',
+        item: 'Diện tích cửa lấy sáng đảm bảo CSTN (Scs≈1/5Ss)',
         Diem1: null,
         Diem2: null,
         Diem3: null,
@@ -261,7 +261,7 @@ export const initialChecklist3 = [
       },
       {
         STT: '19',
-        item: 'Sử dụng vật liệu kính lấy để sáng tự nhiên',
+        item: 'Sử dụng vật liệu kính để lấy sáng tự nhiên',
         Diem1: null,
         Diem2: null,
         Diem3: null,
@@ -292,7 +292,7 @@ export const initialChecklist3 = [
       },
       {
         STT: '22',
-        item: 'Sử dụng thêm quạt để tăng vận tốc gió trong thời gian sử dụng ĐHKK',
+        item: 'Sử dụng thêm quạt để tăng vận tốc gió trong thời gian sử dụng ĐH',
         Diem1: null,
         Diem2: null,
         Diem3: null,
@@ -300,7 +300,7 @@ export const initialChecklist3 = [
       },
       {
         STT: '23',
-        item: 'Hạn chế hướng nhiệt tác động vào bên trong qua lớp vỏ',
+        item: 'Hạn chế lượng nhiệt tác động vào bên trong qua lớp vỏ',
         Diem1: null,
         Diem2: null,
         Diem3: null,
@@ -317,7 +317,7 @@ export const initialChecklist3 = [
       },
       {
         STT: '26',
-        item: 'Phân vùng bố trí nhiệt độ điều hòa hợp lý nhất',
+        item: 'Phân vùng bố trí miệng thổi điều hoà hợp lý nhất',
         Diem1: null,
         Diem2: null,
         Diem3: null,
@@ -622,3 +622,256 @@ export const initialChecklist4 = [
     key: '3'
   }
 ]
+interface SolutionDetail {
+  threshold: number
+  solutions: string[]
+  difficulty: string
+  cost: string
+}
+
+interface ImprovementSolutions {
+  [key: string]: SolutionDetail[]
+}
+export const improvementSolutions: ImprovementSolutions = {
+  'Thiết kế hình khối nhà đảm bảo tối ưu thông gió tự nhiên': [
+    {
+      threshold: 1,
+      solutions: ['Thay đổi hình dạng khối nhà'],
+      difficulty: 'Khó',
+      cost: 'Nhiều'
+    }
+  ],
+  'Tăng diện tích tiếp xúc của công trình với hướng gió tốt': [
+    {
+      threshold: 1,
+      solutions: ["Sử dụng phương pháp 'xẻ' để tăng diện tích tiếp xúc gió tốt"],
+      difficulty: 'Dễ',
+      cost: 'Ít'
+    }
+  ],
+  'Giải pháp tổ chức không gian đảm bảo TGTN theo phương ngang': [
+    {
+      threshold: 1,
+      solutions: ['Tổ chức thông gió tự nhiên xuyên phòng'],
+      difficulty: 'Dễ',
+      cost: 'Không'
+    }
+  ],
+  'Giải pháp tổ chức không gian đảm bảo TGTN theo phương đứng': [
+    {
+      threshold: 1,
+      solutions: ['Thiết kế sân trong, giếng trời nhằm tăng cường TGTN'],
+      difficulty: 'Dễ',
+      cost: 'Nhiều'
+    }
+  ],
+  'Công trình quay về hướng gió tốt': [
+    {
+      threshold: 1,
+      solutions: ['Lựa chọn hướng công trình theo hướng gió tốt'],
+      difficulty: 'Khó',
+      cost: 'Không'
+    }
+  ],
+  'Có giải pháp hạn chế tác động của hướng gió bất lợi': [
+    {
+      threshold: 1,
+      solutions: ['Không mở cửa đón gió ở hướng gió bất lợi'],
+      difficulty: 'Dễ',
+      cost: 'Không'
+    }
+  ],
+  'Giải pháp vị trí cửa đón gió và thoát gió đảm bảo TGTN': [
+    {
+      threshold: 1,
+      solutions: ['Bố trí cửa đón gió và thoát gió lệch phía'],
+      difficulty: 'Dễ',
+      cost: 'Không'
+    }
+  ],
+  'Diện tích cửa đảm bảo thông gió tự nhiên': [
+    {
+      threshold: 1,
+      solutions: ['Tăng diện tích cửa thông gió'],
+      difficulty: 'Dễ',
+      cost: 'Không'
+    }
+  ],
+  'Giải pháp kiểm soát thông gió tự nhiên': [
+    {
+      threshold: 1,
+      solutions: ['Sử dụng kết cấu linh hoạt (có thể đóng/mở theo yêu cầu)'],
+      difficulty: 'Dễ',
+      cost: 'Ít'
+    }
+  ],
+  'Giải pháp tăng cường hiệu quả thông gió': [
+    {
+      threshold: 1,
+      solutions: ['Sử dụng thêm quạt để tăng cường lưu lượng gió thổi'],
+      difficulty: 'Dễ',
+      cost: 'Không'
+    }
+  ],
+  'Sử dụng ánh sáng tán xạ để chiếu sáng tự nhiên': [
+    {
+      threshold: 1,
+      solutions: ['Mở cửa lấy sáng (chỉ lấy ánh sáng tán xạ của bầu trời)'],
+      difficulty: 'Dễ',
+      cost: 'Không'
+    }
+  ],
+  'Đảm bảo đồng đều độ rọi trên mặt phẳng làm việc': [
+    {
+      threshold: 2,
+      solutions: ['Đảm bảo L ≤ 2H'],
+      difficulty: '--',
+      cost: 'Không'
+    }
+  ],
+  'Hướng cửa lấy sáng mở về hướng Bắc/Nam': [
+    {
+      threshold: 1,
+      solutions: ['Hướng cửa lấy sáng mở về hướng Bắc/Nam'],
+      difficulty: 'Khó',
+      cost: 'Không'
+    }
+  ],
+  "Giải pháp 'lọc' ánh sáng cho hướng chiếu sáng bất lợi (có trực xạ)": [
+    {
+      threshold: 1,
+      solutions: ['Sử dụng kết cấu che nắng để ngăn ánh sáng trực xạ, chỉ đón ánh sáng tán xạ'],
+      difficulty: 'Dễ',
+      cost: 'Ít'
+    }
+  ],
+  'Diện tích cửa lấy sáng đảm bảo CSTN (Scs≈1/5Ss)': [
+    {
+      threshold: 1,
+      solutions: ['Thiết kế cửa lấy sáng đảm bảo diện tích'],
+      difficulty: 'Dễ',
+      cost: 'Không'
+    }
+  ],
+  'Sử dụng cửa băng, cửa liên tục để đảm bảo đồng đều độ rọi trên mặt phẳng làm việc': [
+    {
+      threshold: 1,
+      solutions: ['Sử dụng cửa băng, cửa liên tục để đảm bảo đồng đều độ rọi trên mặt phẳng làm việc'],
+      difficulty: 'Dễ',
+      cost: 'Không'
+    }
+  ],
+  'Ưu tiên bố trí các không gian chính ở vị trí tốt về CSTN': [
+    {
+      threshold: 1,
+      solutions: ['Tổ chức lại không gian'],
+      difficulty: 'Khó',
+      cost: 'Ít'
+    }
+  ],
+  'Tổ chức thêm các không gian mở để tăng cường CSTN (sân trong, giếng trời)': [
+    {
+      threshold: 1,
+      solutions: ['Tổ chức thêm các không gian mở để tăng cường CSTN (sân trong, giếng trời)'],
+      difficulty: 'Khó',
+      cost: 'Nhiều'
+    }
+  ],
+  'Sử dụng vật liệu kính để lấy sáng tự nhiên': [
+    {
+      threshold: 1,
+      solutions: ['Thay thế vật liệu đặc bằng vật liệu kính'],
+      difficulty: 'Dễ',
+      cost: 'Không'
+    }
+  ],
+  'Kết hợp sử dụng kết cấu che nắng cho kính nếu bị nắng chiếu trực tiếp': [
+    {
+      threshold: 1,
+      solutions: ['Bổ sung kết cấu che nắng cho phần kính bị nắng chiếu trực tiếp'],
+      difficulty: 'Dễ',
+      cost: 'Ít'
+    }
+  ],
+  'Tổ chức thông gió tự nhiên vào một số thời điểm thích hợp': [
+    {
+      threshold: 1,
+      solutions: ['Sử dụng hệ thống điều khiển đóng/mở cửa thông gió'],
+      difficulty: 'Dễ',
+      cost: 'Ít'
+    }
+  ],
+  'Sử dụng thêm quạt để tăng vận tốc gió trong thời gian sử dụng ĐH': [
+    {
+      threshold: 1,
+      solutions: ['Bố trí thêm hệ thống quạt cho các không gian chính'],
+      difficulty: 'Dễ',
+      cost: 'Ít'
+    }
+  ],
+  'Hạn chế lượng nhiệt tác động vào bên trong qua lớp vỏ': [
+    {
+      threshold: 1,
+      solutions: ['Dùng vật liệu cách nhiệt hoặc giải pháp "tránh" BXMT'],
+      difficulty: 'Dễ',
+      cost: 'Ít'
+    }
+  ],
+
+  'Che nắng cho lớp vỏ': [
+    {
+      threshold: 1,
+      solutions: ['Bổ sung kết cấu che nắng bên ngoài'],
+      difficulty: 'Dễ',
+      cost: 'Ít'
+    }
+  ],
+  'Thiết kế không gian với kích thước tối ưu': [
+    {
+      threshold: 1,
+      solutions: ['Phân bố lại không gian "đều" nhất'],
+      difficulty: 'Dễ',
+      cost: 'Không'
+    }
+  ],
+  'Phân vùng bố trí miệng thổi điều hoà hợp lý nhất': [
+    {
+      threshold: 1,
+      solutions: ['Bố trí lại bố trí miệng thổi điều hoà'],
+      difficulty: 'Dễ',
+      cost: 'Không'
+    }
+  ],
+  'Kiểm soát sự rò rỉ không khí qua lớp vỏ': [
+    {
+      threshold: 1,
+      solutions: ['Thi công đảm bảo không rò rỉ không khí'],
+      difficulty: 'Dễ',
+      cost: 'Không'
+    }
+  ],
+  'Có giải pháp cách nhiệt cho lớp vỏ bao che': [
+    {
+      threshold: 1,
+      solutions: ['Bổ sung vật liệu cách nhiệt cho lớp vỏ'],
+      difficulty: 'Dễ',
+      cost: 'Ít'
+    }
+  ],
+  'Sử dụng năng lượng áp mái để làm mát công trình': [
+    {
+      threshold: 1,
+      solutions: ['Lắp đặt năng lượng áp mái cho công trình'],
+      difficulty: 'Dễ',
+      cost: 'Nhiều'
+    }
+  ],
+  'Bổ sung năng lượng sạch cho hệ thống điện quốc gia (nếu dư sản lượng)': [
+    {
+      threshold: 1,
+      solutions: ['Lắp đặt hệ thống kiểm soát điện 2 chiều với lưới điện quốc gia'],
+      difficulty: 'Dễ',
+      cost: 'Ít'
+    }
+  ]
+}
