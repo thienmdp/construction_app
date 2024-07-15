@@ -107,21 +107,27 @@ export default function DrawerDetail({ selectedItem, onClose, openDrawer }: any)
                     Điểm số: <b>{scores[parseInt(checklistCurrent) - 1].score}</b>
                   </p>
                 )}
-                {scores[parseInt(checklistCurrent) - 1].score !== 0 && (
-                  <p className='pb-4'>
-                    Mức hiệu quả năng lượng:{' '}
-                    <b>
-                      {scores[parseInt(checklistCurrent) - 1].score < 50 && 'Không đạt'}
-                      {scores[parseInt(checklistCurrent) - 1].score === 51 && 'Đạt'}
-                      {scores[parseInt(checklistCurrent) - 1].score >= 52 &&
-                        scores[parseInt(checklistCurrent) - 1].score <= 65 &&
-                        'Đạt hạng bạc (Silver)'}
-                      {scores[parseInt(checklistCurrent) - 1].score >= 66 &&
-                        scores[parseInt(checklistCurrent) - 1].score <= 80 &&
-                        'Đạt hạng vàng (Gold)'}
-                      {scores[parseInt(checklistCurrent) - 1].score >= 81 && 'Đạt hạng bạch kim (Platinum)'}
-                    </b>
-                  </p>
+                {checklistCurrent === '3' || checklistCurrent === '4' ? (
+                  <>
+                    {scores[parseInt(checklistCurrent) - 1].score !== 0 && (
+                      <p className='pb-4'>
+                        Mức hiệu quả năng lượng:{' '}
+                        <b>
+                          {scores[parseInt(checklistCurrent) - 1].score < 50 && 'Không đạt'}
+                          {scores[parseInt(checklistCurrent) - 1].score === 51 && 'Đạt'}
+                          {scores[parseInt(checklistCurrent) - 1].score >= 52 &&
+                            scores[parseInt(checklistCurrent) - 1].score <= 65 &&
+                            'Đạt hạng bạc (Silver)'}
+                          {scores[parseInt(checklistCurrent) - 1].score >= 66 &&
+                            scores[parseInt(checklistCurrent) - 1].score <= 80 &&
+                            'Đạt hạng vàng (Gold)'}
+                          {scores[parseInt(checklistCurrent) - 1].score >= 81 && 'Đạt hạng bạch kim (Platinum)'}
+                        </b>
+                      </p>
+                    )}
+                  </>
+                ) : (
+                  ''
                 )}
               </div>
             </Card>
