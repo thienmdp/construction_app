@@ -9,7 +9,7 @@ const Hero = () => {
   const navigate = useNavigate()
 
   return (
-    <div id='about' className='min-h-[80vh] flex items-center '>
+    <div id='about' className='min-h-[80vh] flex items-center mt-14'>
       <ScrollAnimationWrapper>
         <motion.div
           className='px-4 mx-auto text-center sm:px-6 lg:px-8'

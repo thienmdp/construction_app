@@ -1,8 +1,8 @@
 import { Dropdown, Popover } from 'antd'
 import { useEffect, useState } from 'react'
 import { styled } from 'styled-components'
-import { Link } from 'react-router-dom'
-import { Link as LinkScroll, animateScroll as scroll } from 'react-scroll'
+import { Link as RouterLink } from 'react-router-dom'
+import { Link, animateScroll as scroll } from 'react-scroll'
 import { MenuProps } from 'antd/lib/menu'
 import { useAppSelector } from '@/redux/store'
 import path from '@/constants/path'
@@ -54,22 +54,23 @@ export const Header = () => {
     >
       <nav className='bg-white border-gray-200 '>
         <Container className='flex items-center justify-between px-6 py-4 mx-auto containerr max-w-6xl min-h-[77px]'>
-          <Link
+          <RouterLink
             to={path.landing}
             className='flex items-center'
             onClick={() => scroll.scrollToTop({ duration: 300, smooth: true })}
           >
             <img src='/assets/logo.svg' className='w-auto h-auto' height={150} width={150} alt='logo' />
-          </Link>
+          </RouterLink>
           <ul className=' items-center justify-around w-[300px] hidden md:flex'>
             <li>
-              <LinkScroll
+              <Link
                 className={
                   'p-2 px-3 mx-2 cursor-pointer animation-hover inline-block relative w-max ' +
-                  (activeLink === 'services'
+                  (activeLink === 'about'
                     ? ' text-orange_app animation-active '
                     : ' text-black-500 hover:text-orange_app ')
                 }
+                activeClass='active'
                 to={'about'}
                 spy={true}
                 smooth={true}
@@ -81,10 +82,10 @@ export const Header = () => {
                 aria-current='page'
               >
                 Trang chủ
-              </LinkScroll>
+              </Link>
             </li>
             <li className='relative cursor-pointer group'>
-              <LinkScroll
+              <Link
                 activeClass='active'
                 to='feature'
                 spy={true}
@@ -102,10 +103,10 @@ export const Header = () => {
                 }
               >
                 Tính năng
-              </LinkScroll>
+              </Link>
             </li>
             <li>
-              <LinkScroll
+              <Link
                 activeClass='active'
                 to='pricing'
                 spy={true}
@@ -123,7 +124,7 @@ export const Header = () => {
                 }
               >
                 Liên hệ
-              </LinkScroll>
+              </Link>
             </li>
           </ul>
           <div className='flex items-center '>
@@ -137,12 +138,12 @@ export const Header = () => {
                 // >
                 //   Login
                 // </Link>
-                <Link
+                <RouterLink
                   to={'/free-trial'}
                   className='px-2 py-2 text-sm font-medium text-white transition duration-300 transform rounded-lg shadow-lg bg-gradient-to-r from-red_app to-orange_app hover:shadow-xl'
                 >
                   Dùng thử miễn phí
-                </Link>
+                </RouterLink>
               )}
             </span>
             <MobileMenu />

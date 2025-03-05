@@ -1,5 +1,5 @@
 import Cookies from 'js-cookie'
-import { Link } from 'react-router-dom'
+import { Link as RouterLink } from 'react-router-dom'
 import React, { useState } from 'react'
 import type { GetProp, MenuProps } from 'antd'
 import { Button, Drawer, Menu, Space } from 'antd'
@@ -18,7 +18,7 @@ import {
   StarOutlined
 } from '@ant-design/icons'
 import { logOut } from '@/redux/features/auth.slice'
-import { Link as LinkScroll, animateScroll as scroll } from 'react-scroll'
+import { Link, animateScroll as scroll } from 'react-scroll'
 
 type MenuItem = GetProp<MenuProps, 'items'>[number]
 
@@ -33,7 +33,7 @@ export const MobileMenu = () => {
     {
       key: '1',
       label: (
-        <Link
+        <RouterLink
           to={'/'}
           onClick={() => {
             setOpen(false)
@@ -41,7 +41,7 @@ export const MobileMenu = () => {
           }}
         >
           Home
-        </Link>
+        </RouterLink>
       ),
       icon: <HomeOutlined />,
       onClick: () => setOpen(false)
@@ -49,9 +49,9 @@ export const MobileMenu = () => {
     {
       key: '2',
       label: (
-        <LinkScroll to={'contact'} spy={true} smooth={true} duration={300} onClick={() => setOpen(false)}>
+        <Link to={'contact'} spy={true} smooth={true} duration={300} onClick={() => setOpen(false)}>
           Contact
-        </LinkScroll>
+        </Link>
       ),
       icon: <ContactsOutlined />,
       onClick: () => setOpen(false)
@@ -59,28 +59,28 @@ export const MobileMenu = () => {
     {
       key: '3',
       label: (
-        <Link
+        <RouterLink
           to={'/free-trial'}
           onClick={() => {
             setOpen(false)
           }}
         >
           Free Trial
-        </Link>
+        </RouterLink>
       ),
       icon: <CustomerServiceOutlined />,
       children: [
         {
           key: '4',
           label: (
-            <Link
+            <RouterLink
               to={'/free-trial'}
               onClick={() => {
                 setOpen(false)
               }}
             >
               Free Trial
-            </Link>
+            </RouterLink>
           ),
           icon: <StarFilled />,
           onClick: () => setOpen(false)
@@ -88,14 +88,14 @@ export const MobileMenu = () => {
         {
           key: '5',
           label: (
-            <Link
+            <RouterLink
               to={'/#'}
               onClick={() => {
                 setOpen(false)
               }}
             >
               Construction
-            </Link>
+            </RouterLink>
           ),
           icon: <StarOutlined />,
           onClick: () => setOpen(false)
@@ -103,14 +103,14 @@ export const MobileMenu = () => {
         {
           key: '6',
           label: (
-            <Link
+            <RouterLink
               to={'/#'}
               onClick={() => {
                 setOpen(false)
               }}
             >
               Construction
-            </Link>
+            </RouterLink>
           ),
           icon: <StarOutlined />,
           onClick: () => setOpen(false)
@@ -121,7 +121,7 @@ export const MobileMenu = () => {
     {
       key: 'link',
       label: (
-        <Link
+        <RouterLink
           to={'/sign-in'}
           onClick={() => {
             setOpen(false)
@@ -129,7 +129,7 @@ export const MobileMenu = () => {
           }}
         >
           {user ? 'Dashboard' : 'Sign In'}
-        </Link>
+        </RouterLink>
       ),
       icon: <LoginOutlined />,
       onClick: () => setOpen(false)
