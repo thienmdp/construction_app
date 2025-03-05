@@ -8,186 +8,165 @@ const Pricing = () => {
   const scrollAnimation = useMemo(() => getScrollAnimation(), [])
 
   return (
-    <div className='bg-gradient-to-b from-white-300 to-white-500 w-full py-14' id='pricing'>
-      <div className='max-w-screen-2xl  px-6 sm:px-8 lg:px-16 mx-auto flex flex-col w-full text-center justify-center'>
-        <div className='flex flex-col w-full'>
-          <ScrollAnimationWrapper>
-            <motion.h3
-              variants={scrollAnimation}
-              className='text-2xl sm:text-3xl lg:text-4xl font-medium text-black-600 leading-relaxed'
-            >
-              Choose Your Plan
-            </motion.h3>
-            <motion.p
-              variants={scrollAnimation}
-              className='leading-normal w-10/12 sm:w-7/12 lg:w-6/12 mx-auto my-2 text-center'
-            >
-              Let's choose the package that is best for you and explore it happily and cheerfully.
-            </motion.p>
-          </ScrollAnimationWrapper>
-          <div className='grid grid-flow-row sm:grid-flow-col grid-cols-1 sm:grid-cols-3 gap-4 lg:gap-12 py-8 lg:py-12 px-6 sm:px-0 lg:px-6'>
-            <ScrollAnimationWrapper className='flex justify-center w-full'>
-              <motion.div
-                variants={scrollAnimation}
-                className='flex flex-col justify-center items-center border-2 border-gray-500 rounded-xl py-4 px-6 lg:px-12 w-full'
-                whileHover={{
-                  scale: 1.1,
-                  transition: {
-                    duration: 0.2
-                  }
-                }}
-              >
-                <div className='p-4 lg:p-0 mt-6 lg:mt-16'>
-                  <img src='/assets/Free.png' width={145} height={165} alt='Free Plan' />
-                </div>
-                <p className='text-lg text-black-600 font-medium capitalize my-2 sm:my-7'>Free Plan</p>
-                <ul className='flex flex-col list-inside pl-6 xl:pl-0 items-start justify-start text-left text-black-500 flex-grow'>
-                  <li className='relative check custom-list my-2'>Unlimited Bandwitch</li>
-                  <li className='relative check custom-list my-2'>Encrypted Connection</li>
-                  <li className='relative check custom-list my-2'>No Traffic Logs</li>
-                  <li className='relative check custom-list my-2'>Works on All Devices</li>
-                </ul>
-                <div className='flex flex-col w-full justify-center mb-8 flex-none mt-12'>
-                  <p className='text-2xl text-black-600 text-center mb-4 '>Free</p>
-                  <Button size='large' type='default'>
-                    Select
-                  </Button>
-                </div>
-              </motion.div>
-            </ScrollAnimationWrapper>
-            <ScrollAnimationWrapper className='flex justify-center w-full'>
-              <motion.div
-                variants={scrollAnimation}
-                className='flex flex-col justify-center items-center border-2 border-gray-500 rounded-xl py-4 px-6 lg:px-12 w-full'
-                whileHover={{
-                  scale: 1.1,
-                  transition: {
-                    duration: 0.2
-                  }
-                }}
-              >
-                <div className='p-4 lg:p-0 mt-6 lg:mt-16'>
-                  <img src='/assets/Standard.png' width={145} height={165} alt='Standard Plan' />
-                </div>
-                <p className='text-lg text-black-600 font-medium capitalize my-2 sm:my-7'>Standard Plan </p>
-                <ul className='flex flex-col list-inside pl-6 xl:pl-0 items-start justify-start text-left text-black-500 flex-grow'>
-                  <li className='relative check custom-list my-2'>Unlimited Bandwitch</li>
-                  <li className='relative check custom-list my-2'>Encrypted Connection</li>
-                  <li className='relative check custom-list my-2'>No Traffic Logs</li>
-                  <li className='relative check custom-list my-2'>Works on All Devices</li>
-                  <li className='relative check custom-list my-2'>Connect Anyware </li>
-                </ul>
-                <div className='flex flex-col w-full justify-center mb-8 flex-none mt-12'>
-                  <p className='text-2xl text-black-600 text-center mb-4 '>
-                    $9 <span className='text-black-500'>/ mo</span>
-                  </p>
-                  <Button size='large' type='default'>
-                    Select
-                  </Button>
-                </div>
-              </motion.div>
-            </ScrollAnimationWrapper>
-            <ScrollAnimationWrapper className='flex justify-center w-full'>
-              <motion.div
-                variants={scrollAnimation}
-                className='flex flex-col justify-center items-center border-2 border-gray-500 rounded-xl py-4 px-6 lg:px-12 w-full'
-                whileHover={{
-                  scale: 1.1,
-                  transition: {
-                    duration: 0.2
-                  }
-                }}
-              >
-                <div className='p-4 lg:p-0 mt-6 lg:mt-16'>
-                  <img src='/assets/Premium.png' width={145} height={165} alt='Premium Plan' />
-                </div>
-                <p className='text-lg text-black-600 font-medium capitalize my-2 sm:my-7'>Premium Plan </p>
-                <ul className='flex flex-col list-inside pl-6 xl:pl-0 items-start justify-start text-left text-black-500 flex-grow'>
-                  <li className='relative check custom-list my-2'>Unlimited Bandwitch</li>
-                  <li className='relative check custom-list my-2'>Encrypted Connection</li>
-                  <li className='relative check custom-list my-2'>No Traffic Logs</li>
-                  <li className='relative check custom-list my-2'>Works on All Devices</li>
-                  <li className='relative check custom-list my-2'>Connect Anyware </li>
-                  <li className='relative check custom-list my-2'>Get New Features </li>
-                </ul>
-                <div className='flex flex-col w-full justify-center mb-8 flex-none mt-12'>
-                  <p className='text-2xl text-black-600 text-center mb-4 '>
-                    $12 <span className='text-black-500'>/ mo</span>
-                  </p>
+    <div className='px-4 mx-auto mt-8 mb-6 sm:px-6 lg:px-8 max-w-7xl' id='pricing'>
+      <div className='flex flex-col justify-center w-full text-center'>
+        <ScrollAnimationWrapper>
+          <motion.h3
+            variants={scrollAnimation}
+            className='mb-4 text-3xl font-semibold leading-snug text-gray-900 lg:text-4xl'
+          >
+            Lựa chọn gói giải pháp phù hợp với{' '}
+            <span className='font-bold text-transparent bg-clip-text bg-gradient-to-r from-red_app to-orange_app'>
+              doanh nghiệp của bạn
+            </span>
+          </motion.h3>
+          <motion.p variants={scrollAnimation} className='mb-12 text-lg text-gray-600'>
+            Chúng tôi cung cấp các gói dịch vụ linh hoạt, đáp ứng nhu cầu của mọi quy mô doanh nghiệp
+          </motion.p>
+        </ScrollAnimationWrapper>
 
-                  <Button size='large' type='default'>
-                    Select
-                  </Button>
-                </div>
-              </motion.div>
-            </ScrollAnimationWrapper>
-          </div>
-        </div>
-        <div className='flex flex-col w-full my-16'>
-          <ScrollAnimationWrapper>
-            <motion.h3
-              variants={scrollAnimation}
-              className='text-2xl sm:text-3xl lg:text-4xl font-medium text-black-600 leading-relaxed w-9/12 sm:w-6/12 lg:w-4/12 mx-auto'
-            >
-              Huge Global Network of Fast VPN{' '}
-            </motion.h3>
-            <motion.p className='leading-normal  mx-auto my-2 w-10/12 sm:w-7/12 lg:w-6/12' variants={scrollAnimation}>
-              See LaslesVPN everywhere to make it easier for you when you move locations.
-            </motion.p>
-          </ScrollAnimationWrapper>
-          <ScrollAnimationWrapper>
-            <motion.div className='py-12 w-full px-8 mt-16' variants={scrollAnimation}>
-              <img src='/assets/HugeGlobal.svg' className='w-full h-auto' />
-            </motion.div>
-          </ScrollAnimationWrapper>
-          <ScrollAnimationWrapper>
+        <div className='grid grid-cols-1 gap-6 md:gap-8 md:grid-cols-2 xl:grid-cols-3 mt-14'>
+          <ScrollAnimationWrapper className='flex justify-center'>
             <motion.div
-              className='w-full flex justify-evenly items-center mt-4 flex-wrap lg:flex-nowrap'
               variants={scrollAnimation}
+              className='flex flex-col justify-between w-full max-w-sm p-6 border-2 border-gray-200 sm:p-8 rounded-xl'
+              whileHover={{
+                scale: 1.02,
+                transition: { duration: 0.2 }
+              }}
             >
-              {/* <Netflix className="h-18 w-auto" /> */}
-              <img src='/assets/Icon/amazon.png' className='h-14 w-auto mt-4 lg:mt-2' alt='' />
-              <img src='/assets/Icon/netflix.png' className='h-14 w-auto mt-2 lg:mt-0' alt='' />
-              <img src='/assets/Icon/reddit.png' className='h-12 w-auto mt-2 lg:mt-0' alt='' />
-              <img src='/assets/Icon/discord.png' className='h-14 w-auto mt-2 lg:mt-0' alt='' />
-              <img src='/assets/Icon/spotify.png' className='h-12 w-auto mt-2 lg:mt-0' alt='' />
-            </motion.div>
-          </ScrollAnimationWrapper>
-        </div>
-        <div className='flex flex-col w-full my-16' id='testimoni'>
-          <ScrollAnimationWrapper>
-            <motion.h3
-              variants={scrollAnimation}
-              className='text-2xl sm:text-3xl lg:text-4xl font-medium text-black-600 leading-normal w-9/12 sm: lg:w-4/12 mx-auto'
-            >
-              Trusted by Thousands of Happy Customer{' '}
-            </motion.h3>
-            <motion.p
-              variants={scrollAnimation}
-              className='leading-normal mx-auto mb-2 mt-4 w-10/12 sm:w-7/12 lg:w-6/12'
-            >
-              These are the stories of our customers who have joined us with great pleasure when using this crazy
-              feature.
-            </motion.p>
-          </ScrollAnimationWrapper>
-
-          <ScrollAnimationWrapper className='relative w-full my-16'>
-            <motion.div variants={scrollAnimation} custom={{ duration: 3 }}>
-              <div className='absolute rounded-xl  py-8 sm:py-14 px-6 sm:px-12 lg:px-16 w-full flex flex-col sm:flex-row justify-between items-center z-10 bg-white-500'>
-                <div className='flex flex-col text-left w-10/12 sm:w-7/12 lg:w-5/12 mb-6 sm:mb-0'>
-                  <h5 className='text-black-600 text-xl sm:text-2xl lg:text-3xl leading-relaxed font-medium'>
-                    Subscribe Now for <br /> Get Special Features!
-                  </h5>
-                  <p>Let's subscribe with us and find the fun.</p>
-                </div>
-                <Button size='large' type='primary'>
-                  Get Started
+              <div>
+                <h4 className='mb-3 text-xl font-semibold text-gray-800 sm:text-2xl'>Cơ bản</h4>
+                <p className='mb-4 text-gray-600 sm:mb-6'>Giải pháp khởi đầu cho doanh nghiệp vừa và nhỏ</p>
+                <ul className='mb-6 space-y-3 text-left sm:mb-8 sm:space-y-4'>
+                  <li className='flex items-center text-gray-700'>
+                    <svg className='w-5 h-5 mr-2 text-green-500' fill='currentColor' viewBox='0 0 20 20'>
+                      <path d='M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z' />
+                    </svg>
+                    Giám sát năng lượng cơ bản
+                  </li>
+                  <li className='flex items-center text-gray-700'>
+                    <svg className='w-5 h-5 mr-2 text-green-500' fill='currentColor' viewBox='0 0 20 20'>
+                      <path d='M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z' />
+                    </svg>
+                    Báo cáo hàng tháng
+                  </li>
+                  <li className='flex items-center text-gray-700'>
+                    <svg className='w-5 h-5 mr-2 text-green-500' fill='currentColor' viewBox='0 0 20 20'>
+                      <path d='M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z' />
+                    </svg>
+                    Hỗ trợ qua email
+                  </li>
+                </ul>
+              </div>
+              <div className='mt-auto'>
+                <p className='mb-4 text-2xl font-bold sm:text-3xl'>
+                  2.000.000đ<span className='text-base font-normal sm:text-lg'>/tháng</span>
+                </p>
+                <Button size='large' type='default' block>
+                  Chọn gói này
                 </Button>
               </div>
-              <div
-                className='absolute bg-black-600 opacity-5 w-11/12 roudned-lg h-60 sm:h-56 top-0 mt-8 mx-auto left-0 right-0'
-                style={{ filter: 'blur(114px)' }}
-              ></div>
+            </motion.div>
+          </ScrollAnimationWrapper>
+
+          <ScrollAnimationWrapper className='flex justify-center'>
+            <motion.div
+              variants={scrollAnimation}
+              className='flex flex-col justify-between w-full max-w-sm p-6 border-2 sm:p-8 border-orange_app rounded-xl bg-gradient-to-b from-white to-orange-50'
+              whileHover={{
+                scale: 1.02,
+                transition: { duration: 0.2 }
+              }}
+            >
+              <div>
+                <h4 className='mb-3 text-xl font-semibold text-gray-800 sm:text-2xl'>Tiêu chuẩn</h4>
+                <p className='mb-4 text-gray-600 sm:mb-6'>Phù hợp với doanh nghiệp đang phát triển</p>
+                <ul className='mb-6 space-y-3 text-left sm:mb-8 sm:space-y-4'>
+                  <li className='flex items-center text-gray-700'>
+                    <svg className='w-5 h-5 mr-2 text-green-500' fill='currentColor' viewBox='0 0 20 20'>
+                      <path d='M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z' />
+                    </svg>
+                    Tất cả tính năng gói Cơ bản
+                  </li>
+                  <li className='flex items-center text-gray-700'>
+                    <svg className='w-5 h-5 mr-2 text-green-500' fill='currentColor' viewBox='0 0 20 20'>
+                      <path d='M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z' />
+                    </svg>
+                    Phân tích chi tiết theo thời gian thực
+                  </li>
+                  <li className='flex items-center text-gray-700'>
+                    <svg className='w-5 h-5 mr-2 text-green-500' fill='currentColor' viewBox='0 0 20 20'>
+                      <path d='M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z' />
+                    </svg>
+                    Đề xuất tối ưu hóa tự động
+                  </li>
+                  <li className='flex items-center text-gray-700'>
+                    <svg className='w-5 h-5 mr-2 text-green-500' fill='currentColor' viewBox='0 0 20 20'>
+                      <path d='M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z' />
+                    </svg>
+                    Hỗ trợ 24/7
+                  </li>
+                </ul>
+              </div>
+              <div className='mt-auto'>
+                <p className='mb-4 text-2xl font-bold sm:text-3xl'>
+                  5.000.000đ<span className='text-base font-normal sm:text-lg'>/tháng</span>
+                </p>
+                <Button size='large' type='primary' block>
+                  Chọn gói này
+                </Button>
+              </div>
+            </motion.div>
+          </ScrollAnimationWrapper>
+
+          <ScrollAnimationWrapper className='flex justify-center'>
+            <motion.div
+              variants={scrollAnimation}
+              className='flex flex-col justify-between w-full max-w-sm p-6 border-2 border-gray-200 sm:p-8 rounded-xl'
+              whileHover={{
+                scale: 1.02,
+                transition: { duration: 0.2 }
+              }}
+            >
+              <div>
+                <h4 className='mb-3 text-xl font-semibold text-gray-800 sm:text-2xl'>Cao cấp</h4>
+                <p className='mb-4 text-gray-600 sm:mb-6'>Giải pháp toàn diện cho doanh nghiệp lớn</p>
+                <ul className='mb-6 space-y-3 text-left sm:mb-8 sm:space-y-4'>
+                  <li className='flex items-center text-gray-700'>
+                    <svg className='w-5 h-5 mr-2 text-green-500' fill='currentColor' viewBox='0 0 20 20'>
+                      <path d='M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z' />
+                    </svg>
+                    Tất cả tính năng gói Tiêu chuẩn
+                  </li>
+                  <li className='flex items-center text-gray-700'>
+                    <svg className='w-5 h-5 mr-2 text-green-500' fill='currentColor' viewBox='0 0 20 20'>
+                      <path d='M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z' />
+                    </svg>
+                    AI dự đoán và cảnh báo sớm
+                  </li>
+                  <li className='flex items-center text-gray-700'>
+                    <svg className='w-5 h-5 mr-2 text-green-500' fill='currentColor' viewBox='0 0 20 20'>
+                      <path d='M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z' />
+                    </svg>
+                    Tích hợp API tùy chỉnh
+                  </li>
+                  <li className='flex items-center text-gray-700'>
+                    <svg className='w-5 h-5 mr-2 text-green-500' fill='currentColor' viewBox='0 0 20 20'>
+                      <path d='M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z' />
+                    </svg>
+                    Tư vấn chuyên sâu
+                  </li>
+                </ul>
+              </div>
+              <div className='mt-auto'>
+                <p className='mb-4 text-2xl font-bold sm:text-3xl'>
+                  10.000.000đ<span className='text-base font-normal sm:text-lg'>/tháng</span>
+                </p>
+                <Button size='large' type='default' block>
+                  Chọn gói này
+                </Button>
+              </div>
             </motion.div>
           </ScrollAnimationWrapper>
         </div>

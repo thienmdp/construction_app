@@ -80,7 +80,7 @@ export const Header = () => {
                 }}
                 aria-current='page'
               >
-                About
+                Trang chủ
               </LinkScroll>
             </li>
             <li className='relative cursor-pointer group'>
@@ -102,7 +102,7 @@ export const Header = () => {
                     : ' text-black-500 hover:text-orange_app ')
                 }
               >
-                Feature
+                Tính năng
               </LinkScroll>
               {/* </Dropdown> */}
             </li>
@@ -124,7 +124,7 @@ export const Header = () => {
                     : ' text-black-500 hover:text-orange_app ')
                 }
               >
-                Pricing
+                Liên hệ
               </LinkScroll>
             </li>
           </ul>
@@ -132,12 +132,18 @@ export const Header = () => {
             <span className='hidden md:block'>
               {user && <CardUser />}
               {!user && (
+                // <Link
+                //   className='text-orange-600 cursor-pointer hover:underline underline-offset-1 hover:text-orange_app'
+                //   to={'/sign-in'}
+                //   onClick={() => scroll.scrollToTop({ duration: 300, smooth: true })}
+                // >
+                //   Login
+                // </Link>
                 <Link
-                  className='text-orange-600 cursor-pointer hover:underline underline-offset-1 hover:text-orange_app'
-                  to={'/sign-in'}
-                  onClick={() => scroll.scrollToTop({ duration: 300, smooth: true })}
+                  to={'/free-trial'}
+                  className='px-2 py-2 text-sm font-medium text-white transition duration-300 transform rounded-lg shadow-lg bg-gradient-to-r from-red_app to-orange_app hover:shadow-xl'
                 >
-                  Login
+                  Dùng thử miễn phí
                 </Link>
               )}
             </span>

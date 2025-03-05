@@ -15,10 +15,10 @@ export default function Landing() {
         <title>Construction Application</title>
         <meta name='description' content={`Construction app description`} />
       </Helmet>
-      <div className='max-w-screen-xl min-h-screen px-8 mx-auto xl:px-16'>
+      <div className='max-w-screen-xl min-h-screen mx-auto xl:px-16'>
         <Hero />
-        {/* <Feature /> */}
-        {/* <Pricing /> */}
+        <Feature />
+        <Pricing />
       </div>
     </>
   )
