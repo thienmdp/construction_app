@@ -84,7 +84,6 @@ export const Header = () => {
               </LinkScroll>
             </li>
             <li className='relative cursor-pointer group'>
-              {/* <Dropdown menu={{ items }} placement='bottom' arrow> */}
               <LinkScroll
                 activeClass='active'
                 to='feature'
@@ -104,7 +103,6 @@ export const Header = () => {
               >
                 Tính năng
               </LinkScroll>
-              {/* </Dropdown> */}
             </li>
             <li>
               <LinkScroll
